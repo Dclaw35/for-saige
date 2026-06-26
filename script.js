@@ -20,6 +20,7 @@ function showSlide(nextIndex, manual = false) {
   prevBtn.style.opacity = index === 0 ? ".35" : "1";
   nextBtn.textContent = index === total - 1 ? "Start Over" : "Next";
   if (index > 7) hint.style.opacity = ".28";
+  document.body.classList.toggle("dark-moment", slides[index].classList.contains("effect-dark"));
   const auto = slides[index].dataset.auto;
   if (auto && !userInteracted) timer = setTimeout(() => showSlide(index + 1), Number(auto));
 }
@@ -53,7 +54,7 @@ document.addEventListener("touchend", e => {
 
 function createPetals() {
   const field = document.querySelector(".petals");
-  for (let i = 0; i < 22; i++) {
+  for (let i = 0; i < 24; i++) {
     const p = document.createElement("span");
     p.className = "petal";
     p.style.left = `${Math.random() * 100}vw`;
