@@ -78,8 +78,8 @@ function setupIntroNotes(){
     randomNote.textContent = options[Math.floor(Math.random() * options.length)];
   }
 }
+
 function setupEasterEggs(){
-  const heartToast = document.getElementById('heart-toast');
   const progressToast = document.getElementById('progress-toast');
   const salonTap = document.querySelector('.tap-salon');
   const familyTap = document.querySelector('.tap-family');
@@ -90,17 +90,12 @@ function setupEasterEggs(){
   const sorryTap = document.querySelector('.tap-sorry');
   const formTitle = document.querySelector('.form-title');
   const salonSlide = document.querySelector('.easter-responsibilities');
-  const treasureHearts = Array.from(document.querySelectorAll('.treasure-heart'));
-  const formCard = document.querySelector('.form-card');
-  const foundHearts = new Set();
-  const totalHearts = treasureHearts.length;
 
   setupIntroNotes();
 
-  const notePulse = (noteSel, hostSel, cls='show-note', ms=2400) => {
+  const notePulse = (noteSel, cls='show-note', ms=2800) => {
     const note = document.querySelector(noteSel);
-    const host = document.querySelector(hostSel) || note;
-    if(!note || !host) return;
+    if(!note) return;
     note.classList.remove(cls);
     void note.offsetWidth;
     note.classList.add(cls);
@@ -110,11 +105,11 @@ function setupEasterEggs(){
   if(salonTap && salonSlide){ salonTap.addEventListener('click', e=>{ e.stopPropagation(); pulseClass(salonSlide, 'salon-praise', 2600); }); }
   if(houseTap && salonSlide){ houseTap.addEventListener('click', e=>{ e.stopPropagation(); pulseClass(salonSlide, 'house-praise', 2600); }); }
   if(familyTap && salonSlide){ familyTap.addEventListener('click', e=>{ e.stopPropagation(); pulseClass(salonSlide, 'family-glow', 1900); }); }
-  if(youTap){ youTap.addEventListener('click', e=>{ e.stopPropagation(); notePulse('.always-you-note', '.always-you-note'); }); }
-  if(overthinkTap){ overthinkTap.addEventListener('click', e=>{ e.stopPropagation(); notePulse('.overthink-note', '.overthink-note'); }); }
-  if(worryTap){ worryTap.addEventListener('click', e=>{ e.stopPropagation(); notePulse('.worry-note', '.worry-note'); }); }
-  if(sorryTap){ sorryTap.addEventListener('click', e=>{ e.stopPropagation(); notePulse('.sorry-note', '.sorry-note'); }); }
-  if(formTitle){ formTitle.addEventListener('click', e=>{ e.stopPropagation(); notePulse('.form-title-note', '.form-title-note', 'show-note', 2800); }); }
+  if(youTap){ youTap.addEventListener('click', e=>{ e.stopPropagation(); notePulse('.always-you-note'); }); }
+  if(overthinkTap){ overthinkTap.addEventListener('click', e=>{ e.stopPropagation(); notePulse('.overthink-note'); }); }
+  if(worryTap){ worryTap.addEventListener('click', e=>{ e.stopPropagation(); notePulse('.worry-note'); }); }
+  if(sorryTap){ sorryTap.addEventListener('click', e=>{ e.stopPropagation(); notePulse('.sorry-note', 'show-note', 3200); }); }
+  if(formTitle){ formTitle.addEventListener('click', e=>{ e.stopPropagation(); notePulse('.form-title-note', 'show-note', 4200); }); }
 
   let seqStage = 0;
   const sequenceNote = document.querySelector('.sequence-note');
@@ -124,24 +119,6 @@ function setupEasterEggs(){
   if(every) every.addEventListener('click', e=>{ e.stopPropagation(); seqStage = 1; flashToast(progressToast, '1 / 3', 850); });
   if(single) single.addEventListener('click', e=>{ e.stopPropagation(); if(seqStage === 1){ seqStage = 2; flashToast(progressToast, '2 / 3', 850); } else { seqStage = 0; } });
   if(time) time.addEventListener('click', e=>{ e.stopPropagation(); if(seqStage === 2 && sequenceNote){ sequenceNote.classList.remove('show-note'); void sequenceNote.offsetWidth; sequenceNote.classList.add('show-note'); flashToast(progressToast, '3 / 3', 850); setTimeout(()=>flashToast(progressToast, 'in every lifetime', 1300), 650); } seqStage = 0; });
-
-  function markHeartFound(btn){
-    if(!btn) return;
-    const id = btn.dataset.heart;
-    if(foundHearts.has(id)) return;
-    foundHearts.add(id);
-    btn.classList.add('found');
-    flashToast(heartToast, `${foundHearts.size} / ${totalHearts}`, 1400);
-    if(foundHearts.size === totalHearts && formCard){
-      formCard.classList.add('hearts-unlocked');
-      const reward = document.getElementById('heart-reward');
-      if(reward) reward.setAttribute('aria-hidden','false');
-      setTimeout(()=>flashToast(heartToast, 'Secret unlocked', 1800), 650);
-    }
-  }
-  treasureHearts.forEach(btn=>{
-    btn.addEventListener('click', e=>{ e.stopPropagation(); markHeartFound(btn); });
-  });
 
   let secretTapCount = 0;
   let secretTapTimer = null;

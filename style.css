@@ -806,3 +806,82 @@ body.preload .slide{transition:none !important; animation:none !important}
   .intro-random-note{bottom:9%;font-size:11px;padding:0 18px}
   .heart-toast,.progress-toast{bottom:96px;font-size:11px;letter-spacing:.10em;max-width:86vw;white-space:normal;text-align:center}
 }
+
+
+/* v16 cleanup: remove heart quest, stabilize sorry, fix form-note placement, soften world-out slide */
+.treasure-heart,
+.heart-toast,
+.heart-reward,
+.reward-burst{
+  display:none !important;
+}
+
+/* The whole-world-out slide was reading as a hard rectangle on mobile. Keep the mood, lose the block. */
+.world-out-slide{
+  background:
+    radial-gradient(circle at 50% 46%, rgba(255,93,146,.10), transparent 22rem),
+    radial-gradient(circle at 50% 110%, rgba(0,0,0,.18), transparent 40rem) !important;
+}
+.world-out-slide .world-vignette{
+  opacity:1 !important;
+  background:
+    radial-gradient(ellipse at center, rgba(0,0,0,0) 42%, rgba(0,0,0,.13) 78%, rgba(0,0,0,.26) 100%) !important;
+}
+.world-out-slide .text-card{
+  background:transparent !important;
+  box-shadow:none !important;
+}
+
+/* Keep (Sorry.) visible long enough to actually find and tap. */
+.sorry-aside{
+  opacity:.72 !important;
+  animation:none !important;
+  top:31% !important;
+  left:58% !important;
+  color:rgba(255,231,238,.76);
+  text-shadow:0 0 18px rgba(255,93,146,.22);
+}
+.active .sorry-aside{
+  opacity:.72 !important;
+  animation:none !important;
+}
+.sorry-aside:hover{
+  opacity:.95 !important;
+}
+
+/* Put the Your Turn easter egg safely inside the form instead of half off-screen. */
+.form-title-note{
+  position:static !important;
+  display:block;
+  transform:none !important;
+  left:auto !important;
+  top:auto !important;
+  margin:-8px 0 18px;
+  max-width:100%;
+  text-align:left;
+  font-family:"Cormorant Garamond",Georgia,serif;
+  font-size:clamp(20px,4.2vw,28px);
+  line-height:1.15;
+  color:rgba(255,232,239,.78);
+  letter-spacing:.01em;
+  opacity:0;
+  pointer-events:none;
+}
+.form-title-note.show-note{
+  animation:formNoteReveal 4.2s ease forwards !important;
+}
+@keyframes formNoteReveal{
+  0%{opacity:0;filter:blur(8px);transform:translateY(6px)}
+  16%{opacity:.92;filter:none;transform:none}
+  78%{opacity:.92}
+  100%{opacity:0}
+}
+.form-card{
+  overflow-x:hidden;
+}
+@media(max-width:740px){
+  .form-title-note{
+    font-size:clamp(18px,5.4vw,24px);
+    margin:-4px 0 16px;
+  }
+}
