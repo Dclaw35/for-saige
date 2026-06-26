@@ -728,3 +728,81 @@ body.preload .slide{transition:none !important; animation:none !important}
   25%{opacity:.95}
   100%{opacity:0; transform:translate(58px,-48px) scale(1.05)}
 }
+
+
+/* v15 easter eggs */
+.tap-target{cursor:pointer}
+.tap-target span{display:inline-block;position:relative}
+.tap-target span::after{content:"";position:absolute;left:0;right:0;bottom:-4px;height:1px;background:linear-gradient(90deg,transparent,rgba(255,220,230,.45),transparent);transform:scaleX(0);opacity:0;transition:transform .28s ease,opacity .28s ease}
+.tap-target:hover span::after,.tap-target:focus-visible span::after{transform:scaleX(1);opacity:1}
+.tap-seq,.tap-you,.tap-house,.tap-overthink,.tap-worry{cursor:pointer}
+.always-you-note,.house-note,.overthink-note,.worry-note,.form-title-note,.sequence-note,.sorry-note{opacity:0;pointer-events:none}
+.always-you-note{left:50%;top:66%;transform:translateX(-50%)}
+.world-out-slide{position:relative}
+.world-vignette{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .9s ease;background:radial-gradient(circle at center, rgba(0,0,0,0) 42%, rgba(0,0,0,.18) 74%, rgba(0,0,0,.40) 100%)}
+.world-out-slide.active .world-vignette{opacity:1}
+.cuddle-aside{left:58%;top:34%;font-size:17px;opacity:0;color:rgba(255,236,241,.78)}
+.active .cuddle-aside{animation:ghostRiseCuddle 3s ease 1.0s forwards}
+@keyframes ghostRiseCuddle{0%{opacity:0;transform:translate(-50%,16px)}25%{opacity:.88}100%{opacity:0;transform:translate(-50%,-20px)}}
+
+.easter-responsibilities .house-note{left:50%;top:59%;font-size:18px;transform:translateX(-50%)}
+.easter-responsibilities.house-praise .house-note{animation:ghostRiseSalon 2.6s ease forwards}
+.active .always-you-note.show-note,
+.active .overthink-note.show-note,
+.active .worry-note.show-note,
+.active .sorry-note.show-note,
+.active .form-title-note.show-note,
+.active .sequence-note.show-note{animation:ghostRiseSalon 2.6s ease forwards}
+
+.form-title{cursor:pointer;display:inline-block;position:relative}
+.form-title-note{left:50%;top:78px;font-size:16px;transform:translateX(-50%)}
+.form-title-note em{font-style:italic}
+
+.ghost-aside.tap-sorry{cursor:pointer;pointer-events:auto}
+.sorry-note{left:60%;top:27%;font-size:16px;transform:translateX(-50%)}
+
+.treasure-heart{position:absolute;border:0;background:none;color:rgba(255,215,228,.14);font-size:16px;line-height:1;padding:0;opacity:0;transform:scale(.8);transition:opacity .4s ease, transform .35s ease, color .35s ease;filter:drop-shadow(0 0 8px rgba(255,93,146,.14));z-index:8}
+.treasure-heart:hover{color:rgba(255,230,238,.55)}
+.auto-heart.active,.active .auto-heart{opacity:.55;animation:heartReveal 0.8s ease forwards 1.4s, heartDrift 3.2s ease-in-out infinite 2.2s}
+.hidden-heart{opacity:0}
+.easter-responsibilities.family-glow .hidden-heart{opacity:.55;animation:heartReveal .75s ease forwards .15s, heartDrift 3.2s ease-in-out infinite .95s}
+.treasure-heart.found{opacity:.92!important;color:rgba(255,198,220,.88)!important;transform:scale(1.12)!important}
+.heart-1{right:24%;bottom:18%}
+.heart-2{right:18%;top:18%}
+.heart-3{right:18%;top:24%}
+.anime-heart-slide .heart-4{right:18%;top:18%}
+.final-heart-slide .heart-5{right:20%;top:22%}
+@keyframes heartReveal{from{opacity:0;transform:scale(.2)}to{opacity:.55;transform:scale(1)}}
+@keyframes heartDrift{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+.heart-toast,.progress-toast{position:fixed;left:50%;bottom:110px;transform:translateX(-50%);padding:10px 16px;border-radius:999px;background:rgba(10,5,9,.76);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.10);color:rgba(255,241,245,.92);font:600 13px/1.2 Inter,system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase;opacity:0;pointer-events:none;transition:opacity .25s ease, transform .25s ease;z-index:50;white-space:nowrap}
+.heart-toast.show,.progress-toast.show{opacity:1;transform:translateX(-50%) translateY(-8px)}
+
+.heart-reward{margin-top:18px;padding:18px 18px 14px;border-radius:22px;background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.08);text-align:center;display:none;position:relative;overflow:hidden}
+.form-card.hearts-unlocked .heart-reward{display:block;animation:rewardReveal .7s ease both}
+.heart-reward p,.heart-reward small{margin:0}
+.heart-reward p + p{margin-top:6px}
+.heart-reward small{display:block;margin-top:10px;color:rgba(255,231,238,.62);font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+.reward-burst{position:absolute;inset:0;pointer-events:none}
+.reward-burst span{position:absolute;left:50%;top:52%;color:rgba(255,192,220,.9);font-size:18px;opacity:0}
+.form-card.hearts-unlocked .reward-burst span:nth-child(1){animation:rewardHeart1 1.8s ease .1s forwards}
+.form-card.hearts-unlocked .reward-burst span:nth-child(2){animation:rewardHeart2 1.8s ease .2s forwards}
+.form-card.hearts-unlocked .reward-burst span:nth-child(3){animation:rewardHeart3 1.8s ease .28s forwards}
+.form-card.hearts-unlocked .reward-burst span:nth-child(4){animation:rewardHeart4 1.8s ease .36s forwards}
+.form-card.hearts-unlocked .reward-burst span:nth-child(5){animation:rewardHeart5 1.8s ease .44s forwards}
+@keyframes rewardReveal{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes rewardHeart1{0%{opacity:0;transform:translate(-6px,0) scale(.5)}20%{opacity:1}100%{opacity:0;transform:translate(-70px,-56px) scale(1.1)}}
+@keyframes rewardHeart2{0%{opacity:0;transform:translate(0,0) scale(.5)}20%{opacity:1}100%{opacity:0;transform:translate(-26px,-74px) scale(1)}}
+@keyframes rewardHeart3{0%{opacity:0;transform:translate(0,0) scale(.5)}20%{opacity:1}100%{opacity:0;transform:translate(0,-82px) scale(1.08)}}
+@keyframes rewardHeart4{0%{opacity:0;transform:translate(0,0) scale(.5)}20%{opacity:1}100%{opacity:0;transform:translate(28px,-72px) scale(1)}}
+@keyframes rewardHeart5{0%{opacity:0;transform:translate(6px,0) scale(.5)}20%{opacity:1}100%{opacity:0;transform:translate(72px,-56px) scale(1.1)}}
+
+.intro-context-note,.intro-random-note{position:absolute;left:50%;transform:translateX(-50%);text-align:center;opacity:0;max-width:min(80vw,680px);color:rgba(255,236,241,.72);font-family:Inter,system-ui,sans-serif;letter-spacing:.08em;font-size:13px;line-height:1.4;text-transform:uppercase;pointer-events:none}
+.intro-context-note{bottom:16%;animation:introNoteIn 1.4s ease 2.2s forwards}
+.intro-random-note{bottom:9%;font-size:12px;letter-spacing:.04em;text-transform:none;font-family:"Cormorant Garamond",Georgia,serif;font-style:italic;animation:introNoteIn 1.4s ease 3.1s forwards}
+@keyframes introNoteIn{from{opacity:0;transform:translate(-50%,8px)}to{opacity:1;transform:translate(-50%,0)}}
+
+@media(max-width:740px){
+  .intro-context-note{bottom:15%;font-size:11px;padding:0 14px}
+  .intro-random-note{bottom:9%;font-size:11px;padding:0 18px}
+  .heart-toast,.progress-toast{bottom:96px;font-size:11px;letter-spacing:.10em;max-width:86vw;white-space:normal;text-align:center}
+}
