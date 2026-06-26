@@ -885,3 +885,116 @@ body.preload .slide{transition:none !important; animation:none !important}
     margin:-4px 0 16px;
   }
 }
+
+
+/* v18 fullscreen video prelude */
+body.pre-video .ambient,
+body.pre-video .petals,
+body.pre-video #deck,
+body.pre-video .hud{
+  opacity:0;
+}
+
+.video-intro{
+  position:fixed;
+  inset:0;
+  z-index:60;
+  background:#000;
+  overflow:hidden;
+  opacity:1;
+  transition:opacity 1.15s ease, visibility 1.15s ease;
+  visibility:visible;
+}
+
+.video-intro-media{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  background:#000;
+  filter:saturate(.96) contrast(1.06) brightness(.82);
+}
+
+.video-intro-shade{
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(0,0,0,0) 30%, rgba(0,0,0,.10) 58%, rgba(0,0,0,.40) 100%),
+    linear-gradient(180deg, rgba(0,0,0,.22), rgba(0,0,0,0) 22%, rgba(0,0,0,.18) 100%);
+  pointer-events:none;
+}
+
+.video-intro.is-fading{
+  opacity:0;
+  visibility:hidden;
+}
+
+.video-bypass{
+  position:absolute;
+  right:16px;
+  top:16px;
+  z-index:3;
+  border:1px solid rgba(255,255,255,.12);
+  background:rgba(0,0,0,.28);
+  color:rgba(255,241,245,.78);
+  backdrop-filter:blur(8px);
+  padding:8px 12px;
+  border-radius:999px;
+  font:700 11px/1 Inter,system-ui,sans-serif;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  opacity:.22;
+  transition:opacity .25s ease, background .25s ease;
+}
+.video-bypass:hover,
+.video-bypass:focus-visible{
+  opacity:.9;
+  background:rgba(0,0,0,.45);
+}
+
+.video-fallback{
+  position:absolute;
+  left:50%;
+  bottom:8%;
+  transform:translateX(-50%);
+  z-index:3;
+  padding:10px 16px;
+  border-radius:999px;
+  background:rgba(0,0,0,.32);
+  border:1px solid rgba(255,255,255,.08);
+  color:rgba(255,236,241,.84);
+  backdrop-filter:blur(8px);
+  font:700 11px/1 Inter,system-ui,sans-serif;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .3s ease;
+}
+.video-intro.awaiting-tap .video-fallback{
+  opacity:.95;
+  pointer-events:auto;
+}
+
+body.video-finished .ambient,
+body.video-finished .petals,
+body.video-finished #deck,
+body.video-finished .hud{
+  opacity:1;
+  transition:opacity 1.05s ease;
+}
+
+@media(max-width:740px){
+  .video-bypass{
+    right:12px;
+    top:12px;
+    padding:8px 10px;
+    font-size:10px;
+  }
+  .video-fallback{
+    bottom:7%;
+    max-width:84vw;
+    text-align:center;
+    font-size:10px;
+  }
+}
