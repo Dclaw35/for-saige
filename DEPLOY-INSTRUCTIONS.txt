@@ -1,1 +1,1 @@
-Replace index.html, style.css, script.js, and the images folder in your GitHub repo, commit, then hard refresh.
+Replace index.html, style.css, script.js, and the images folder in your GitHub Pages repo, commit, then hard refresh.
