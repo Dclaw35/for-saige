@@ -1,25 +1,18 @@
 HOW TO UPDATE YOUR GITHUB PAGES SITE
 
-This is V4: the cinematic no-scroll slideshow.
+This is V5.1: polished cinematic slideshow.
 
 1. Unzip this folder.
-2. Open your `for-saige` repository on GitHub.
-3. Delete or replace the old:
+2. In your GitHub `for-saige` repo, replace:
    - index.html
    - style.css
    - script.js
    - images folder
-4. Upload everything from this folder:
-   - index.html
-   - style.css
-   - script.js
-   - images folder
-5. Commit changes.
-6. Wait 1 to 3 minutes.
-7. Open your GitHub Pages link.
+3. Commit changes.
+4. Wait 1 to 3 minutes.
+5. Open the GitHub Pages link.
 
-Important cache note:
-This version uses style.css?v=4 and script.js?v=4. If you still see the old version, hard refresh:
+Hard refresh if needed:
 Windows: Ctrl + F5
 Mac: Command + Shift + R
-iPhone: close the browser tab and reopen the link.
+iPhone: close the tab and reopen the link.
