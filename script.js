@@ -49,33 +49,27 @@ function flashToast(el, text, ms=1700){
 }
 function setupIntroNotes(){
   const context = document.getElementById('intro-context-note');
-  const randomNote = document.getElementById('intro-random-note');
   if(context){
     const now = new Date();
-    const month = now.getMonth();
-    const date = now.getDate();
     const hour = now.getHours();
-    let line = '';
-    if(month === 0 && date === 5){
+    const month = now.getMonth() + 1;
+    const date = now.getDate();
+    let line = 'still the prettiest thing on this page.';
+    if(month === 1 && date === 5){
       line = 'still choosing you today too. Happy anniversary, gorgeous.';
-    } else if(hour < 4){
-      line = 'this feels like our kind of hour.';
-    } else if(hour < 12){
+    } else if(hour >= 5 && hour < 11){
       line = 'good morning, favorite person.';
-    } else if(hour >= 20){
+    } else if(hour >= 11 && hour < 17){
+      line = 'hope your day is being gentle with you.';
+    } else if(hour >= 17 && hour < 20){
+      line = 'been waiting to tell you this all day.';
+    } else if(hour >= 20 || hour < 1){
       line = 'you’re up late, beautiful.';
+    } else {
+      line = 'this feels like our kind of hour.';
     }
     context.textContent = line;
-    if(!line) context.style.display = 'none';
-  }
-  if(randomNote){
-    const options = [
-      'I hope you smiled here.',
-      'I made this part thinking about your face.',
-      'You’re still my obsession.',
-      'I love the life we’re building, even when it’s loud.'
-    ];
-    randomNote.textContent = options[Math.floor(Math.random() * options.length)];
+    context.style.display = 'block';
   }
 }
 

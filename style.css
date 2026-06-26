@@ -1274,3 +1274,25 @@ body.video-finished .hud{
   margin-left:auto !important;
   margin-right:auto !important;
 }
+
+
+/* v25 intro note cleanup */
+.intro-random-note{
+  display:none !important;
+}
+.intro-context-note{
+  display:block !important;
+  bottom:20% !important;
+  opacity:0;
+  z-index:4;
+  color:rgba(255,231,238,.82);
+  text-shadow:0 0 22px rgba(255,93,146,.24), 0 0 10px rgba(0,0,0,.36);
+  animation:introNoteIn 1.4s ease 1.7s forwards !important;
+}
+@media(max-width:740px){
+  .intro-context-note{
+    bottom:18% !important;
+    font-size:12px !important;
+    max-width:86vw;
+  }
+}
