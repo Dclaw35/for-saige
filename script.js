@@ -145,8 +145,34 @@ const videoIntro = document.getElementById('video-intro');
 const introVideo = document.getElementById('intro-video');
 const videoBypass = document.getElementById('video-bypass');
 const videoFallback = document.getElementById('video-fallback');
+const videoWish = document.getElementById('video-wish');
+const videoMine = document.getElementById('video-mine');
 let deckStarted = false;
 let introFinished = false;
+let wishTimer = null;
+let mineTimer = null;
+let washTimer = null;
+let smokeTimer = null;
+let fadeTimer = null;
+let removeTimer = null;
+
+
+function clearPreludeTimers(){
+  [wishTimer, mineTimer, washTimer, smokeTimer, fadeTimer, removeTimer].forEach(t=>clearTimeout(t));
+}
+
+function schedulePreludeCues(){
+  if(!videoIntro || !introVideo) return;
+  clearPreludeTimers();
+  videoIntro.classList.remove('show-wish','show-mine','toward-heart');
+  const duration = Number.isFinite(introVideo.duration) && introVideo.duration > 0 ? introVideo.duration : 6;
+  const wishAt = Math.max((duration - 3.8) * 1000, 700);
+  const mineAt = Math.max((duration - 1.9) * 1000, wishAt + 900);
+  const washAt = Math.max((duration - 1.1) * 1000, mineAt - 220);
+  wishTimer = setTimeout(()=>{ videoIntro.classList.add('show-wish'); }, wishAt);
+  mineTimer = setTimeout(()=>{ videoIntro.classList.remove('show-wish'); videoIntro.classList.add('show-mine'); }, mineAt);
+  washTimer = setTimeout(()=>{ videoIntro.classList.add('toward-heart'); }, washAt);
+}
 
 function initDeck(){
   if(deckStarted) return;
@@ -160,10 +186,14 @@ function initDeck(){
 function finishVideoIntro(){
   if(introFinished) return;
   introFinished = true;
+  clearPreludeTimers();
   initDeck();
   if(videoIntro){
-    videoIntro.classList.add('is-fading');
-    setTimeout(()=>videoIntro.remove(), 1250);
+    videoIntro.classList.remove('show-wish','show-mine','toward-heart');
+    videoIntro.classList.add('black-beat');
+    smokeTimer = setTimeout(()=>{ videoIntro.classList.add('smoke-reveal'); }, 460);
+    fadeTimer = setTimeout(()=>{ videoIntro.classList.add('is-fading'); }, 1320);
+    removeTimer = setTimeout(()=>videoIntro.remove(), 2550);
   }
 }
 
@@ -178,12 +208,16 @@ function beginVideoPrelude(){
     if(playPromise && typeof playPromise.then === 'function'){
       playPromise.then(()=>{
         videoIntro.classList.remove('awaiting-tap');
+        schedulePreludeCues();
       }).catch(()=>{
         videoIntro.classList.add('awaiting-tap');
       });
+    } else {
+      schedulePreludeCues();
     }
   };
 
+  introVideo.addEventListener('loadedmetadata', schedulePreludeCues, { once:true });
   introVideo.addEventListener('ended', finishVideoIntro, { once:true });
   introVideo.addEventListener('error', finishVideoIntro, { once:true });
 
