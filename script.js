@@ -1,109 +1,23 @@
 const qs = (sel, root = document) => root.querySelector(sel);
-const qsa = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 
 window.addEventListener("load", () => {
-  runIntro();
   createPetals();
   createEmbers();
-  setupRevealObserver();
   setupCopyButton();
 });
-
-function runIntro() {
-  const opening = qs(".opening");
-  const heart = qs(".heart-loader");
-  const hi = qs(".intro-line");
-
-  setTimeout(() => heart.classList.add("hide"), 3000);
-  setTimeout(() => hi.classList.add("show"), 4300);
-  setTimeout(() => hi.classList.add("hide"), 6900);
-  setTimeout(() => {
-    opening.classList.add("done");
-    document.body.classList.add("intro-complete");
-    runHeroSequence();
-  }, 8200);
-}
-
-const heroLines = [
-  "You once thought I was creepy.",
-  "I thought you were the prettiest girl I’d ever seen.",
-  "Turns out one of us was right.",
-  "I made this because sometimes the things that matter most deserve more than a text message.",
-  "So...",
-  "Welcome to a tiny little corner of the internet that exists for one reason."
-];
-
-function wait(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-async function runHeroSequence() {
-  const box = qs("#hero-sequence");
-  await wait(1150);
-
-  for (const text of heroLines) {
-    const line = document.createElement("p");
-    line.className = "hero-line";
-    line.textContent = text;
-    box.appendChild(line);
-    await wait(90);
-    line.classList.add("show");
-    await wait(text.length > 70 ? 2450 : 1650);
-    line.classList.add("hide");
-    await wait(900);
-    line.remove();
-  }
-
-  document.body.classList.add("hero-complete");
-}
-
-function typeText(el, text, speed = 38) {
-  let i = 0;
-  function tick() {
-    if (i <= text.length) {
-      el.textContent = text.slice(0, i++);
-      setTimeout(tick, speed);
-    }
-  }
-  tick();
-}
-
-function setupRevealObserver() {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-
-      entry.target.classList.add("visible");
-
-      const secondType = entry.target.querySelector("#second-type");
-      if (secondType && !secondType.dataset.started) {
-        secondType.dataset.started = "true";
-        typeText(secondType, secondType.dataset.text || "", 38);
-      }
-
-      const loveCopy = entry.target.querySelector(".love-copy");
-      if (loveCopy && !loveCopy.dataset.butterfly) {
-        loveCopy.dataset.butterfly = "true";
-        setTimeout(() => loveCopy.classList.add("butterfly-time"), 900);
-      }
-    });
-  }, { threshold: 0.18 });
-
-  qsa(".reveal").forEach((el) => observer.observe(el));
-}
 
 function createPetals() {
   const field = qs(".petal-field");
   if (!field) return;
-  for (let i = 0; i < 12; i++) {
+  for (let i = 0; i < 10; i++) {
     const petal = document.createElement("span");
     petal.className = "petal";
     petal.style.left = `${Math.random() * 100}vw`;
-    petal.style.animationDuration = `${26 + Math.random() * 30}s`;
+    petal.style.animationDuration = `${28 + Math.random() * 32}s`;
     petal.style.animationDelay = `${-Math.random() * 38}s`;
     petal.style.width = `${9 + Math.random() * 10}px`;
     petal.style.height = `${16 + Math.random() * 15}px`;
-    petal.style.setProperty("--drift", `${Math.random() * 150 - 75}px`);
+    petal.style.setProperty("--drift", `${Math.random() * 140 - 70}px`);
     field.appendChild(petal);
   }
 }
@@ -111,7 +25,7 @@ function createPetals() {
 function createEmbers() {
   const field = qs(".ember-field");
   if (!field) return;
-  for (let i = 0; i < 42; i++) {
+  for (let i = 0; i < 38; i++) {
     const ember = document.createElement("span");
     ember.className = "ember";
     ember.style.left = `${Math.random() * 100}vw`;
