@@ -1,12 +1,1 @@
-HOW TO UPDATE YOUR GITHUB PAGES SITE
-
-This is the Director's Cut.
-
-Replace:
-- index.html
-- style.css
-- script.js
-- images folder
-
-Commit changes and wait 1 to 3 minutes.
-Hard refresh if needed.
+Replace index.html, style.css, script.js, and the images folder in your GitHub repo, commit, then hard refresh.
