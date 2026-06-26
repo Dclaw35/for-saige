@@ -1,3 +1,4 @@
+document.body.classList.add('preload');
 const slides = Array.from(document.querySelectorAll('.slide'));
 const total = slides.length;
 let index = 0;
@@ -26,4 +27,6 @@ function createPetals(){ const field = document.querySelector('.petals'); for(le
 function setupCopyButton(){ const btn = document.getElementById('copy-letter'); if(!btn) return; btn.addEventListener('click', async e=>{ e.stopPropagation(); const name=document.getElementById('from').value.trim()||'Saige'; const letter=document.getElementById('letter').value.trim(); const status=document.getElementById('copy-status'); if(!letter){ status.textContent='You have to write the letter first, beautiful. The button is powerful, but not psychic.'; return; } try{ await navigator.clipboard.writeText(`From: ${name}
 
 ${letter}`); status.textContent='Copied. Now paste it into a text to me.'; } catch { status.textContent='Copy did not work automatically. Highlight the text and copy it the old fashioned way.'; } }); }
-createPetals(); setupCopyButton(); showSlide(0);
+createPetals(); setupCopyButton();
+function initDeck(){ document.body.classList.remove('preload'); showSlide(0); }
+if (document.fonts && document.fonts.ready) { document.fonts.ready.then(initDeck).catch(initDeck); } else { window.addEventListener('load', initDeck, { once: true }); }

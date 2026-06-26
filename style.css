@@ -90,3 +90,57 @@ body.scene-hush .petals{opacity:.05}
 .interlude-note{background:rgba(0,0,0,.74)}
 .hand-note{margin:0;font-family:"Cormorant Garamond",Georgia,serif;font-style:italic;font-size:clamp(28px,5vw,52px);color:rgba(255,240,243,.74);letter-spacing:.02em;transform:rotate(-2deg);animation:noteLift 2.1s ease both}
 @keyframes noteLift{0%{opacity:0;transform:translateY(12px) rotate(-4deg)}25%{opacity:.9}100%{opacity:.55;transform:translateY(-6px) rotate(-2deg)}}
+
+
+/* v8 fixes */
+body.preload #deck, body.preload .progress, body.preload .transport, body.preload .hint, body.preload .counter {opacity:0}
+body.preload .slide{transition:none !important; animation:none !important}
+.slide.motion-build{transform:none;filter:none;transition:opacity .7s ease,visibility .7s ease}
+.slide.motion-build.active{transform:none;filter:none}
+.motion-build.active .text-card{animation:none}
+@keyframes buildIn{from{opacity:0;filter:blur(10px)}to{opacity:1;filter:none}}
+
+.kind-interlude{background:radial-gradient(circle at center,rgba(20,8,12,.55),rgba(0,0,0,.72));}
+.kind-interlude .interlude-shell{position:relative;width:100%;height:100%;display:grid;place-items:center;overflow:hidden}
+.kind-interlude .interlude-shell::before,.kind-interlude .interlude-shell::after{pointer-events:none}
+
+/* Heartbeat interlude */
+.interlude-heartbeat{background:radial-gradient(circle at center,rgba(26,5,12,.82),rgba(0,0,0,.88))}
+.interlude-heartbeat .heart-beat-orb{width:20px;height:20px;border-radius:999px;background:rgba(255,220,232,.82);box-shadow:0 0 26px rgba(255,93,146,.36);position:relative;z-index:2;animation:interludeBeat 1.7s ease-out infinite}
+.interlude-heartbeat .interlude-shell::before{content:"♥";position:absolute;left:50%;top:50%;transform:translate(-50%,-56%);font-size:64px;color:rgba(255,160,190,.20);text-shadow:0 0 28px rgba(255,93,146,.16)}
+@keyframes interludeBeat{0%{transform:scale(.72);box-shadow:0 0 0 0 rgba(255,93,146,.32)}18%{transform:scale(1.16)}36%{transform:scale(.9)}100%{transform:scale(.75);box-shadow:0 0 0 160px rgba(255,93,146,0)}}
+
+/* Petal interlude */
+.interlude-petal{background:radial-gradient(circle at 50% 40%,rgba(80,20,36,.34),rgba(0,0,0,.68))}
+.interlude-petal .interlude-shell::before,.interlude-petal .interlude-shell::after{content:"";position:absolute;width:62px;height:108px;background:radial-gradient(circle at 70% 25%,rgba(255,214,226,.95),rgba(255,116,164,.86) 42%,rgba(116,20,47,.72) 88%);border-radius:82% 18% 74% 26%;filter:drop-shadow(0 0 18px rgba(255,95,150,.28));opacity:.88}
+.interlude-petal .interlude-shell::before{left:42%;top:32%;transform:rotate(-16deg);animation:petalPauseFloat 3.4s ease-in-out infinite}
+.interlude-petal .interlude-shell::after{left:52%;top:42%;transform:rotate(18deg) scale(.78);animation:petalPauseFloat 3.7s ease-in-out infinite reverse}
+@keyframes petalPauseFloat{0%,100%{transform:translateY(0) rotate(-16deg)}50%{transform:translateY(-10px) rotate(-10deg)}}
+
+/* TV interlude */
+.interlude-tv{background:radial-gradient(circle at center,rgba(24,38,76,.58),rgba(0,0,0,.78))}
+.interlude-tv .interlude-shell::before{content:"";position:absolute;inset:18% 14%;border-radius:28px;background:linear-gradient(180deg,rgba(170,218,255,.16),rgba(86,135,255,.10)),repeating-linear-gradient(180deg,rgba(255,255,255,.055) 0 2px,rgba(255,255,255,0) 2px 8px);box-shadow:0 0 120px rgba(98,151,255,.26), inset 0 0 42px rgba(255,255,255,.06);animation:tvPanel 1.7s steps(10,end) infinite}
+.interlude-tv .interlude-shell::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 45%,rgba(116,170,255,.12),transparent 42%);animation:tvWash 1.7s steps(10,end) infinite}
+.interlude-tv .tv-hum{display:none}
+@keyframes tvPanel{0%{opacity:.42;transform:scaleY(.99)}18%{opacity:.68}39%{opacity:.48}60%{opacity:.78}100%{opacity:.46;transform:scaleY(1.01)}}
+@keyframes tvWash{0%{opacity:.16}33%{opacity:.28}66%{opacity:.18}100%{opacity:.24}}
+
+/* Candle blackout */
+.interlude-candle{background:radial-gradient(circle at 30% 78%,rgba(48,18,8,.22),rgba(0,0,0,.88) 46%)}
+.interlude-candle .candle-glow{position:absolute;left:16%;bottom:16%;width:150px;height:150px;border-radius:999px;background:radial-gradient(circle,rgba(255,215,154,.24),rgba(255,177,86,.13) 36%,rgba(255,177,86,0) 70%);filter:blur(4px);animation:soloCandle 1.8s ease-in-out infinite}
+.interlude-candle .candle-glow:before{content:"";position:absolute;left:50%;bottom:22px;width:10px;height:56px;background:linear-gradient(180deg,rgba(255,255,255,.18),rgba(255,255,255,0));transform:translateX(-50%);opacity:.16}
+.interlude-candle .candle-glow:after{content:"";position:absolute;left:50%;top:32%;width:14px;height:32px;border-radius:50% 50% 60% 60%;background:radial-gradient(circle at 50% 35%,rgba(255,250,221,.96),rgba(255,198,71,.82) 45%,rgba(255,136,33,.46) 72%,rgba(255,136,33,0) 76%);transform:translateX(-50%);filter:blur(.4px)}
+@keyframes soloCandle{0%,100%{opacity:.4;transform:scale(1)}35%{opacity:.78;transform:scale(1.06)}64%{opacity:.46;transform:scale(.95)}}
+
+/* Warmth returns */
+.interlude-warmth{background:radial-gradient(circle at 50% 110%,rgba(68,24,12,.44),rgba(0,0,0,.78) 56%)}
+.interlude-warmth .warmth-rise{position:absolute;inset:auto 4% -4% 4%;height:72%;border-radius:50% 50% 0 0;background:radial-gradient(circle at 50% 100%,rgba(255,210,138,.44),rgba(255,149,85,.18) 34%,rgba(255,149,85,0) 70%);filter:blur(10px);animation:warmReturn 2.1s ease both}
+@keyframes warmReturn{0%{opacity:0;transform:translateY(30px) scale(.86)}45%{opacity:.86}100%{opacity:.52;transform:translateY(0) scale(1.04)}}
+
+/* Stillness, breath, note */
+.interlude-still{background:rgba(0,0,0,.86)}
+.interlude-still .interlude-shell::before{content:"";position:absolute;left:50%;top:50%;width:2px;height:84px;background:linear-gradient(180deg,transparent,rgba(255,255,255,.18),transparent);transform:translate(-50%,-50%)}
+.interlude-breath{background:rgba(0,0,0,.82)}
+.breath-ellipsis{margin:0;font-family:Inter,system-ui,sans-serif;font-size:42px;letter-spacing:.42em;color:rgba(255,240,243,.72);animation:breatheDots 1.8s ease-in-out infinite}
+.interlude-note{background:rgba(0,0,0,.76)}
+.hand-note{margin:0;font-family:"Cormorant Garamond",Georgia,serif;font-style:italic;font-size:clamp(32px,5vw,58px);color:rgba(255,240,243,.82);letter-spacing:.02em;transform:rotate(-2deg);animation:noteLift 2.1s ease both;text-shadow:0 0 18px rgba(255,255,255,.08)}
