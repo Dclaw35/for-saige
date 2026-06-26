@@ -61,3 +61,32 @@ body.tv-mode .petals{opacity:.06}
 .ghost-aside{left:56%;top:28% !important;font-size:18px;z-index:7}
 .active .ghost-aside{animation:ghostRiseHigh 3.2s ease .55s forwards}
 @keyframes ghostRiseHigh{0%{opacity:0;transform:translateY(10px)}18%{opacity:.82}72%{opacity:.5}100%{opacity:0;transform:translateY(-18px)}}
+
+/* v6 spacing interludes */
+body.scene-hush .ambient{opacity:.08;animation-play-state:paused;filter:blur(1px)}
+body.scene-hush .petals{opacity:.05}
+.kind-interlude{background:radial-gradient(circle at center,rgba(0,0,0,.14),rgba(0,0,0,.28));}
+.kind-interlude .interlude-shell{position:relative;width:min(900px,100%);height:min(48svh,420px);display:grid;place-items:center;}
+.interlude-heartbeat{background:rgba(0,0,0,.45)}
+.interlude-heartbeat .heart-beat-orb{width:16px;height:16px;border-radius:999px;background:rgba(255,214,225,.65);box-shadow:0 0 26px rgba(255,93,146,.22);animation:interludeBeat 1.7s ease-out infinite}
+@keyframes interludeBeat{0%{transform:scale(.7);box-shadow:0 0 0 0 rgba(255,93,146,.26)}20%{transform:scale(1.1)}42%{transform:scale(.88)}100%{transform:scale(.75);box-shadow:0 0 0 120px rgba(255,93,146,0)}}
+.interlude-petal{background:linear-gradient(180deg,rgba(0,0,0,.12),rgba(0,0,0,.28))}
+.interlude-petal:after{content:"";position:absolute;inset:38% 42%;border-radius:999px;background:radial-gradient(circle,rgba(255,172,200,.14),rgba(255,172,200,0) 70%);filter:blur(16px)}
+.interlude-tv{background:rgba(0,0,0,.25)}
+.interlude-tv .tv-hum{width:min(68vw,760px);height:min(18svh,120px);border-radius:22px;background:linear-gradient(180deg,rgba(140,195,255,.12),rgba(73,131,255,.04));box-shadow:0 0 80px rgba(93,145,255,.22), inset 0 0 18px rgba(255,255,255,.05);opacity:.7;animation:tvHum 2s steps(8,end) infinite}
+@keyframes tvHum{0%{opacity:.48;transform:scaleX(.98)}25%{opacity:.72}50%{opacity:.56}75%{opacity:.8;transform:scaleX(1.01)}100%{opacity:.5}}
+.interlude-candle{background:rgba(0,0,0,.58)}
+.interlude-candle .candle-glow{position:absolute;left:16%;bottom:14%;width:130px;height:130px;border-radius:999px;background:radial-gradient(circle,rgba(255,203,136,.18),rgba(255,175,91,.10) 35%,rgba(255,175,91,0) 68%);filter:blur(4px);animation:soloCandle 1.8s ease-in-out infinite}
+.interlude-candle .candle-glow:after{content:"";position:absolute;left:46%;top:36%;width:12px;height:28px;border-radius:50% 50% 60% 60%;background:radial-gradient(circle at 50% 35%,rgba(255,250,221,.92),rgba(255,198,71,.78) 45%,rgba(255,136,33,.44) 70%,rgba(255,136,33,0) 74%);transform:translateX(-50%);filter:blur(.4px)}
+@keyframes soloCandle{0%,100%{opacity:.35;transform:scale(1)}35%{opacity:.72;transform:scale(1.06)}64%{opacity:.42;transform:scale(.94)}}
+.interlude-warmth{background:rgba(0,0,0,.38)}
+.interlude-warmth .warmth-rise{position:absolute;inset:auto 8% 2% 8%;height:56%;border-radius:50% 50% 0 0;background:radial-gradient(circle at 50% 100%,rgba(255,199,123,.35),rgba(255,140,82,.16) 34%,rgba(255,140,82,0) 70%);filter:blur(8px);animation:warmReturn 2.1s ease both}
+@keyframes warmReturn{0%{opacity:0;transform:translateY(26px) scale(.9)}45%{opacity:.75}100%{opacity:.42;transform:translateY(0) scale(1.05)}}
+.interlude-still{background:rgba(0,0,0,.78)}
+.interlude-still:after{content:"";position:absolute;left:50%;top:50%;width:1px;height:64px;background:linear-gradient(180deg,transparent,rgba(255,255,255,.16),transparent);transform:translate(-50%,-50%);opacity:.45}
+.interlude-breath{background:rgba(0,0,0,.76)}
+.breath-ellipsis{margin:0;font-family:Inter,system-ui,sans-serif;font-size:26px;letter-spacing:.35em;color:rgba(255,240,243,.55);animation:breatheDots 1.8s ease-in-out infinite}
+@keyframes breatheDots{0%,100%{opacity:.22;transform:scale(.98)}50%{opacity:.72;transform:scale(1.02)}}
+.interlude-note{background:rgba(0,0,0,.74)}
+.hand-note{margin:0;font-family:"Cormorant Garamond",Georgia,serif;font-style:italic;font-size:clamp(28px,5vw,52px);color:rgba(255,240,243,.74);letter-spacing:.02em;transform:rotate(-2deg);animation:noteLift 2.1s ease both}
+@keyframes noteLift{0%{opacity:0;transform:translateY(12px) rotate(-4deg)}25%{opacity:.9}100%{opacity:.55;transform:translateY(-6px) rotate(-2deg)}}
