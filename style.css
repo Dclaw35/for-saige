@@ -144,3 +144,215 @@ body.preload .slide{transition:none !important; animation:none !important}
 .breath-ellipsis{margin:0;font-family:Inter,system-ui,sans-serif;font-size:42px;letter-spacing:.42em;color:rgba(255,240,243,.72);animation:breatheDots 1.8s ease-in-out infinite}
 .interlude-note{background:rgba(0,0,0,.76)}
 .hand-note{margin:0;font-family:"Cormorant Garamond",Georgia,serif;font-style:italic;font-size:clamp(32px,5vw,58px);color:rgba(255,240,243,.82);letter-spacing:.02em;transform:rotate(-2deg);animation:noteLift 2.1s ease both;text-shadow:0 0 18px rgba(255,255,255,.08)}
+
+
+/* v9 clean interlude fixes */
+.scene-preclimax .text-card:after{display:none!important}
+.kind-interlude{background:transparent!important}
+.kind-interlude .interlude-shell{
+  position:relative;
+  width:100%;
+  height:100%;
+  display:grid;
+  place-items:center;
+  overflow:hidden;
+}
+.interlude-heart-clean{
+  background:radial-gradient(circle at center,rgba(52,10,24,.32),rgba(0,0,0,.82) 62%)!important;
+}
+.minimal-heart .pulse-ring{
+  position:absolute;
+  width:22px;
+  height:22px;
+  border-radius:50%;
+  border:1px solid rgba(255,172,200,.42);
+  animation:cleanPulse 1.55s ease-out infinite;
+}
+.minimal-heart .tiny-heart{
+  font-size:28px;
+  color:rgba(255,190,210,.78);
+  text-shadow:0 0 28px rgba(255,93,146,.35);
+  animation:tinyBeat 1.55s ease-in-out infinite;
+}
+@keyframes cleanPulse{
+  0%{transform:scale(.75);opacity:.65}
+  100%{transform:scale(8);opacity:0}
+}
+@keyframes tinyBeat{
+  0%,100%{transform:scale(1);opacity:.65}
+  20%{transform:scale(1.12);opacity:.9}
+  42%{transform:scale(.94);opacity:.72}
+}
+.interlude-tv-clean{
+  background:radial-gradient(circle at center,rgba(90,142,255,.26),rgba(8,12,26,.78) 56%,rgba(0,0,0,.84))!important;
+}
+.tv-wash span{
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(180deg,rgba(160,205,255,.10),rgba(74,118,255,.06)),
+    repeating-linear-gradient(180deg,rgba(255,255,255,.04) 0 1px,transparent 1px 6px);
+  opacity:.58;
+  animation:cleanTvFlicker 1.4s steps(7,end) infinite;
+}
+@keyframes cleanTvFlicker{
+  0%{opacity:.38;filter:brightness(.85)}
+  24%{opacity:.62;filter:brightness(1.05)}
+  46%{opacity:.44;filter:brightness(.9)}
+  70%{opacity:.68;filter:brightness(1.08)}
+  100%{opacity:.42;filter:brightness(.88)}
+}
+.interlude-petal-clean{
+  background:radial-gradient(circle at 50% 46%,rgba(90,18,42,.28),rgba(0,0,0,.72) 66%)!important;
+}
+.small-petal{
+  position:absolute;
+  width:18px;
+  height:30px;
+  border-radius:80% 20% 70% 30%;
+  background:radial-gradient(circle at 65% 25%,rgba(255,219,230,.92),rgba(255,94,151,.72) 45%,rgba(112,18,48,.64));
+  filter:drop-shadow(0 0 12px rgba(255,95,150,.22));
+  opacity:.72;
+}
+.p1{left:43%;top:42%;transform:rotate(-18deg);animation:smallPetalFloat 2.8s ease-in-out infinite}
+.p2{left:52%;top:50%;transform:rotate(22deg) scale(.78);animation:smallPetalFloat 3.1s ease-in-out infinite reverse}
+.p3{left:49%;top:36%;transform:rotate(8deg) scale(.52);animation:smallPetalFloat 2.5s ease-in-out infinite .3s}
+@keyframes smallPetalFloat{
+  0%,100%{translate:0 0}
+  50%{translate:0 -10px}
+}
+.interlude-candle-clean{
+  background:radial-gradient(circle at 32% 74%,rgba(54,18,8,.35),rgba(0,0,0,.86) 48%)!important;
+}
+.candle-alone .mini-flame{
+  position:absolute;
+  left:32%;
+  top:68%;
+  width:14px;
+  height:32px;
+  border-radius:50% 50% 58% 58%;
+  background:radial-gradient(circle at 50% 35%,rgba(255,248,210,.98),rgba(255,193,73,.82) 42%,rgba(255,118,33,.42) 72%,transparent 78%);
+  box-shadow:0 0 40px rgba(255,168,82,.42),0 0 100px rgba(255,111,54,.18);
+  animation:cleanFlame 1.35s ease-in-out infinite;
+}
+@keyframes cleanFlame{
+  0%,100%{transform:scale(1) skewX(0deg);opacity:.78}
+  45%{transform:scale(1.08) skewX(-4deg);opacity:1}
+  68%{transform:scale(.92) skewX(3deg);opacity:.72}
+}
+.interlude-still-clean{
+  background:rgba(0,0,0,.88)!important;
+}
+.room-still .still-text{
+  font-family:Inter,system-ui,sans-serif;
+  font-size:12px;
+  letter-spacing:.26em;
+  text-transform:uppercase;
+  color:rgba(255,240,243,.38);
+  animation:stillFade 1.7s ease both;
+}
+@keyframes stillFade{
+  0%{opacity:0;filter:blur(8px)}
+  40%{opacity:.56;filter:none}
+  100%{opacity:.26}
+}
+
+.motion-build .text-card,.motion-build .lines p{transform:none!important}
+
+
+/* v10 final interlude repair and mobile stability */
+.interlude-heartbeat,.interlude-tv,.interlude-petal,.interlude-candle,.interlude-still{
+  display:none!important;
+}
+.kind-interlude.interlude-heart-clean,
+.kind-interlude.interlude-tv-clean,
+.kind-interlude.interlude-petal-clean,
+.kind-interlude.interlude-candle-clean,
+.kind-interlude.interlude-still-clean{
+  display:grid!important;
+}
+.interlude-heart-clean{
+  background:radial-gradient(circle at center,rgba(52,10,24,.28),rgba(0,0,0,.84) 62%)!important;
+}
+.interlude-tv-clean{
+  background:radial-gradient(circle at center,rgba(88,132,235,.18),rgba(9,12,28,.82) 58%,rgba(0,0,0,.88))!important;
+}
+.interlude-petal-clean{
+  background:radial-gradient(circle at center,rgba(72,12,32,.22),rgba(0,0,0,.80) 70%)!important;
+}
+.interlude-candle-clean{
+  background:radial-gradient(circle at 32% 74%,rgba(54,18,8,.30),rgba(0,0,0,.88) 46%)!important;
+}
+.interlude-still-clean{
+  background:rgba(0,0,0,.90)!important;
+}
+.interlude-heart-clean .interlude-shell,
+.interlude-tv-clean .interlude-shell,
+.interlude-petal-clean .interlude-shell,
+.interlude-candle-clean .interlude-shell,
+.interlude-still-clean .interlude-shell{
+  position:relative;
+  width:100%;
+  height:100%;
+  display:grid;
+  place-items:center;
+  overflow:hidden;
+}
+.minimal-heart .pulse-ring{
+  position:absolute;
+  width:22px;
+  height:22px;
+  border-radius:50%;
+  border:1px solid rgba(255,172,200,.42);
+  animation:cleanPulse 1.55s ease-out infinite;
+}
+.minimal-heart .tiny-heart{
+  font-size:28px;
+  color:rgba(255,190,210,.78);
+  text-shadow:0 0 28px rgba(255,93,146,.35);
+  animation:tinyBeat 1.55s ease-in-out infinite;
+}
+.tv-wash span{
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(180deg,rgba(160,205,255,.10),rgba(74,118,255,.06)),
+    repeating-linear-gradient(180deg,rgba(255,255,255,.035) 0 1px,transparent 1px 7px);
+  opacity:.48;
+  animation:cleanTvFlicker 1.4s steps(7,end) infinite;
+}
+.small-petal{
+  position:absolute;
+  width:18px;
+  height:30px;
+  border-radius:80% 20% 70% 30%;
+  background:radial-gradient(circle at 65% 25%,rgba(255,219,230,.9),rgba(255,94,151,.68) 45%,rgba(112,18,48,.58));
+  filter:drop-shadow(0 0 12px rgba(255,95,150,.22));
+  opacity:.70;
+}
+.p1{left:43%;top:42%;transform:rotate(-18deg);animation:smallPetalFloat 2.8s ease-in-out infinite}
+.p2{left:52%;top:50%;transform:rotate(22deg) scale(.78);animation:smallPetalFloat 3.1s ease-in-out infinite reverse}
+.p3{left:49%;top:36%;transform:rotate(8deg) scale(.52);animation:smallPetalFloat 2.5s ease-in-out infinite .3s}
+.candle-alone .mini-flame{
+  position:absolute;
+  left:32%;
+  top:68%;
+  width:14px;
+  height:32px;
+  border-radius:50% 50% 58% 58%;
+  background:radial-gradient(circle at 50% 35%,rgba(255,248,210,.98),rgba(255,193,73,.82) 42%,rgba(255,118,33,.42) 72%,transparent 78%);
+  box-shadow:0 0 40px rgba(255,168,82,.42),0 0 100px rgba(255,111,54,.18);
+  animation:cleanFlame 1.35s ease-in-out infinite;
+}
+.room-still .still-text{
+  font-family:Inter,system-ui,sans-serif;
+  font-size:12px;
+  letter-spacing:.26em;
+  text-transform:uppercase;
+  color:rgba(255,240,243,.38);
+  animation:stillFade 1.7s ease both;
+}
+.scene-preclimax .text-card:after{display:none!important}
+.motion-build,.motion-build.active,.motion-build .text-card,.motion-build .lines p{
+  transform:none!important;
+}
