@@ -1145,3 +1145,132 @@ body.video-finished .hud{
   .smoke-two{left:24%;bottom:18%;}
   .smoke-three{left:38%;bottom:34%;}
 }
+
+
+/* v21 slower transition from video into heart */
+body.pre-video .ambient,
+body.pre-video .petals,
+body.pre-video #deck,
+body.pre-video .hud{
+  opacity:0;
+  filter:blur(14px) saturate(.78);
+}
+
+body.video-finished .ambient,
+body.video-finished .petals,
+body.video-finished #deck,
+body.video-finished .hud{
+  opacity:1;
+  filter:none;
+  transition:opacity 2.6s ease, filter 2.8s ease;
+}
+
+.video-intro{
+  transition:opacity 2.25s ease, visibility 2.25s ease;
+}
+.video-intro-media{
+  transition:opacity .95s ease, filter 1.75s ease;
+}
+.video-intro-shade,
+.video-intro-shade::after{
+  transition:background 1.25s ease, opacity 1.25s ease;
+}
+.video-intro.black-beat .video-intro-shade{
+  background:rgba(0,0,0,1);
+}
+.video-intro.smoke-reveal .smoke-one{animation:smokeRiseOneSlow 3.1s ease forwards;}
+.video-intro.smoke-reveal .smoke-two{animation:smokeRiseTwoSlow 3.5s ease forwards;}
+.video-intro.smoke-reveal .smoke-three{animation:smokeRiseThreeSlow 3.25s ease forwards;}
+@keyframes smokeRiseOneSlow{
+  0%{opacity:0;transform:translateY(28px) translateX(-10px) scale(.68)}
+  20%{opacity:.62}
+  100%{opacity:0;transform:translateY(-98px) translateX(30px) scale(1.28)}
+}
+@keyframes smokeRiseTwoSlow{
+  0%{opacity:0;transform:translateY(22px) translateX(0) scale(.66)}
+  20%{opacity:.48}
+  100%{opacity:0;transform:translateY(-116px) translateX(-18px) scale(1.42)}
+}
+@keyframes smokeRiseThreeSlow{
+  0%{opacity:0;transform:translateY(22px) translateX(12px) scale(.68)}
+  20%{opacity:.38}
+  100%{opacity:0;transform:translateY(-90px) translateX(22px) scale(1.22)}
+}
+
+.slide.active.intro-heart-slide .intro-heart{
+  animation:introHeartRevealSlow 3.3s cubic-bezier(.18,.7,.18,1) both, introHeart 2.3s ease-in-out 3.15s infinite;
+  text-shadow:0 0 30px rgba(255,93,146,.62),0 0 120px rgba(255,93,146,.28),0 0 14px rgba(255,255,255,.24);
+}
+.slide.active.intro-heart-slide .intro-ring{
+  animation:introRing 4.8s ease-out 1.65s infinite;
+}
+.slide.active.intro-heart-slide .intro-veil{
+  animation:introBreathe 4.4s ease-in-out 1.1s infinite;
+}
+.slide.active.intro-heart-slide .intro-petal{
+  opacity:.56;
+  animation-duration:5.8s, 6.2s, 6.8s;
+}
+@keyframes introHeartRevealSlow{
+  0%{opacity:0;transform:scale(.10);filter:blur(18px) brightness(.72)}
+  18%{opacity:.18;transform:scale(.24);filter:blur(14px) brightness(.84)}
+  36%{opacity:.74;transform:scale(.58);filter:blur(8px) brightness(1.02)}
+  58%{opacity:1;transform:scale(.92);filter:blur(2px) brightness(1.28)}
+  72%{opacity:1;transform:scale(1.18);filter:blur(0) brightness(1.58)}
+  84%{transform:scale(.94);filter:blur(0) brightness(1.18)}
+  100%{opacity:1;transform:scale(1);filter:blur(0) brightness(1)}
+}
+
+
+/* v22 slide 58 cleanup */
+.clean-world-out{
+  display:grid !important;
+  place-items:center !important;
+  text-align:center !important;
+  background:
+    radial-gradient(circle at 50% 48%, rgba(255,93,146,.10), transparent 20rem),
+    radial-gradient(ellipse at center, rgba(0,0,0,0) 48%, rgba(0,0,0,.12) 84%, rgba(0,0,0,.20) 100%) !important;
+  overflow:hidden;
+}
+.clean-world-out::before{
+  content:"";
+  position:absolute;
+  inset:-12%;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(255,172,200,.08), transparent 32%),
+    radial-gradient(ellipse at center, transparent 58%, rgba(0,0,0,.16) 100%);
+  opacity:.74;
+  filter:blur(18px);
+}
+.clean-world-out .world-vignette{
+  display:none !important;
+}
+.clean-world-out .text-card{
+  position:relative;
+  z-index:2;
+  margin:0 auto !important;
+  width:min(980px,100%) !important;
+  min-height:min(520px,72svh) !important;
+  display:grid !important;
+  place-items:center !important;
+  align-content:center !important;
+  justify-items:center !important;
+  text-align:center !important;
+  background:transparent !important;
+  box-shadow:none !important;
+  border:none !important;
+  transform:none !important;
+}
+.clean-world-out .lines{
+  width:100%;
+  display:grid;
+  justify-items:center;
+  align-items:center;
+  text-align:center;
+}
+.clean-world-out .lines p{
+  text-align:center !important;
+  margin-left:auto !important;
+  margin-right:auto !important;
+}

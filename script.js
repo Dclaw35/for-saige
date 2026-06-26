@@ -155,10 +155,11 @@ let washTimer = null;
 let smokeTimer = null;
 let fadeTimer = null;
 let removeTimer = null;
+let deckTimer = null;
 
 
 function clearPreludeTimers(){
-  [wishTimer, mineTimer, washTimer, smokeTimer, fadeTimer, removeTimer].forEach(t=>clearTimeout(t));
+  [wishTimer, mineTimer, washTimer, smokeTimer, fadeTimer, removeTimer, deckTimer].forEach(t=>clearTimeout(t));
 }
 
 function schedulePreludeCues(){
@@ -187,13 +188,15 @@ function finishVideoIntro(){
   if(introFinished) return;
   introFinished = true;
   clearPreludeTimers();
-  initDeck();
   if(videoIntro){
     videoIntro.classList.remove('show-wish','show-mine','toward-heart');
     videoIntro.classList.add('black-beat');
-    smokeTimer = setTimeout(()=>{ videoIntro.classList.add('smoke-reveal'); }, 460);
-    fadeTimer = setTimeout(()=>{ videoIntro.classList.add('is-fading'); }, 1320);
-    removeTimer = setTimeout(()=>videoIntro.remove(), 2550);
+    deckTimer = setTimeout(()=>{ initDeck(); }, 680);
+    smokeTimer = setTimeout(()=>{ videoIntro.classList.add('smoke-reveal'); }, 880);
+    fadeTimer = setTimeout(()=>{ videoIntro.classList.add('is-fading'); }, 2200);
+    removeTimer = setTimeout(()=>videoIntro.remove(), 4550);
+  } else {
+    initDeck();
   }
 }
 
