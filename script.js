@@ -1,49 +1,103 @@
-const qs = (sel, root = document) => root.querySelector(sel);
+const slides = Array.from(document.querySelectorAll(".slide"));
+const total = slides.length;
+let index = 0;
+let timer = null;
+let userInteracted = false;
 
-window.addEventListener("load", () => {
-  createPetals();
-  createEmbers();
-  setupCopyButton();
+const current = document.getElementById("current");
+const progressBar = document.getElementById("progress-bar");
+const nextBtn = document.getElementById("next");
+const prevBtn = document.getElementById("prev");
+const hint = document.getElementById("hint");
+
+function showSlide(nextIndex, manual = false) {
+  if (manual) userInteracted = true;
+  clearTimeout(timer);
+
+  index = Math.max(0, Math.min(total - 1, nextIndex));
+
+  slides.forEach((slide, i) => {
+    slide.classList.toggle("active", i === index);
+  });
+
+  current.textContent = String(index + 1);
+  progressBar.style.width = ((index + 1) / total * 100) + "%";
+
+  prevBtn.style.opacity = index === 0 ? ".35" : "1";
+  nextBtn.textContent = index === total - 1 ? "Start Over" : "Next";
+
+  if (index > 7) {
+    hint.style.opacity = ".28";
+  }
+
+  const auto = slides[index].dataset.auto;
+  if (auto && !userInteracted) {
+    timer = setTimeout(() => showSlide(index + 1), Number(auto));
+  }
+}
+
+function next(manual = true) {
+  if (index >= total - 1) {
+    showSlide(0, manual);
+  } else {
+    showSlide(index + 1, manual);
+  }
+}
+
+function prev() {
+  showSlide(index - 1, true);
+}
+
+nextBtn.addEventListener("click", (event) => {
+  event.stopPropagation();
+  next(true);
 });
 
-function createPetals() {
-  const field = qs(".petal-field");
-  if (!field) return;
-  for (let i = 0; i < 10; i++) {
-    const petal = document.createElement("span");
-    petal.className = "petal";
-    petal.style.left = `${Math.random() * 100}vw`;
-    petal.style.animationDuration = `${28 + Math.random() * 32}s`;
-    petal.style.animationDelay = `${-Math.random() * 38}s`;
-    petal.style.width = `${9 + Math.random() * 10}px`;
-    petal.style.height = `${16 + Math.random() * 15}px`;
-    petal.style.setProperty("--drift", `${Math.random() * 140 - 70}px`);
-    field.appendChild(petal);
-  }
-}
+prevBtn.addEventListener("click", (event) => {
+  event.stopPropagation();
+  prev();
+});
 
-function createEmbers() {
-  const field = qs(".ember-field");
-  if (!field) return;
-  for (let i = 0; i < 38; i++) {
-    const ember = document.createElement("span");
-    ember.className = "ember";
-    ember.style.left = `${Math.random() * 100}vw`;
-    ember.style.top = `${Math.random() * 100}vh`;
-    ember.style.animationDuration = `${4 + Math.random() * 8}s`;
-    ember.style.animationDelay = `${-Math.random() * 8}s`;
-    field.appendChild(ember);
+document.addEventListener("click", (event) => {
+  if (event.target.closest("button, input, textarea, label")) return;
+  next(true);
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.target.matches("input, textarea")) return;
+  if (event.key === "ArrowRight" || event.key === " " || event.key === "Enter") {
+    event.preventDefault();
+    next(true);
   }
-}
+  if (event.key === "ArrowLeft") {
+    event.preventDefault();
+    prev();
+  }
+});
+
+let touchStartX = 0;
+document.addEventListener("touchstart", (event) => {
+  touchStartX = event.changedTouches[0].clientX;
+}, { passive: true });
+
+document.addEventListener("touchend", (event) => {
+  if (event.target.closest("button, input, textarea, label")) return;
+  const dx = event.changedTouches[0].clientX - touchStartX;
+  if (Math.abs(dx) > 50) {
+    dx < 0 ? next(true) : prev();
+  }
+}, { passive: true });
 
 function setupCopyButton() {
-  const btn = qs("#copy-letter");
+  const btn = document.getElementById("copy-letter");
   if (!btn) return;
 
-  btn.addEventListener("click", async () => {
-    const name = qs("#from").value.trim() || "Saige";
-    const letter = qs("#letter").value.trim();
-    const status = qs("#copy-status");
+  btn.addEventListener("click", async (event) => {
+    event.stopPropagation();
+
+    const name = document.getElementById("from").value.trim() || "Saige";
+    const letter = document.getElementById("letter").value.trim();
+    const status = document.getElementById("copy-status");
 
     if (!letter) {
       status.textContent = "You have to write the letter first, beautiful. The button is powerful, but not psychic.";
@@ -58,3 +112,6 @@ function setupCopyButton() {
     }
   });
 }
+
+setupCopyButton();
+showSlide(0);

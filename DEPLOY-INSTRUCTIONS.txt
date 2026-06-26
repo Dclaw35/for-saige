@@ -1,16 +1,14 @@
 HOW TO UPDATE YOUR GITHUB PAGES SITE
 
-Important:
-Delete or overwrite the old files. GitHub may cache old CSS/JS briefly, so this version uses ?v=3 cache-busting links.
+This is V4: the cinematic no-scroll slideshow.
 
 1. Unzip this folder.
 2. Open your `for-saige` repository on GitHub.
-3. Delete the current:
+3. Delete or replace the old:
    - index.html
    - style.css
    - script.js
    - images folder
-   Or overwrite them when uploading.
 4. Upload everything from this folder:
    - index.html
    - style.css
@@ -18,9 +16,10 @@ Delete or overwrite the old files. GitHub may cache old CSS/JS briefly, so this 
    - images folder
 5. Commit changes.
 6. Wait 1 to 3 minutes.
-7. Open the site in a private/incognito window or hard refresh.
+7. Open your GitHub Pages link.
 
-If your browser is showing an old broken version:
-Windows Chrome hard refresh: Ctrl + F5
-Mac Safari: Option + Command + R
-iPhone: close Safari tab, reopen, or add ?v=3 to the URL.
+Important cache note:
+This version uses style.css?v=4 and script.js?v=4. If you still see the old version, hard refresh:
+Windows: Ctrl + F5
+Mac: Command + Shift + R
+iPhone: close the browser tab and reopen the link.
