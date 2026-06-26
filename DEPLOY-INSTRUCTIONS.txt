@@ -1,22 +1,17 @@
-HOW TO UPLOAD TO GITHUB PAGES
+HOW TO UPDATE YOUR GITHUB PAGES SITE
 
 1. Unzip this folder.
 2. Open your `for-saige` repository on GitHub.
-3. Click `Add file` then `Upload files`.
+3. Click `Add file` > `Upload files`.
 4. Drag in:
    - index.html
    - style.css
    - script.js
-   - the images folder
+   - the full images folder
 5. Commit changes.
-6. Go to Settings > Pages.
-7. Under `Build and deployment`, choose:
-   - Source: Deploy from a branch
-   - Branch: main
-   - Folder: /root
-8. Save.
-9. Wait about 1 to 3 minutes.
-10. Your site will be at:
-   https://YOUR-GITHUB-USERNAME.github.io/for-saige/
+6. If GitHub asks whether to replace files with the same name, allow it.
+7. Wait 1 to 3 minutes.
+8. Refresh your GitHub Pages link.
 
-If you see a 404, wait a couple minutes and refresh.
+If GitHub Pages is not enabled yet:
+Settings > Pages > Source: Deploy from branch > Branch: main > Folder: /root > Save.

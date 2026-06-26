@@ -8,4 +8,4 @@ Upload these files to your `for-saige` GitHub repository:
 - script.js
 - images folder
 
-Then enable GitHub Pages from the repository settings.
+Then enable GitHub Pages from repository settings.

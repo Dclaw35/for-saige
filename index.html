@@ -14,55 +14,66 @@
   <div class="petal-field" aria-hidden="true"></div>
   <div class="ember-field" aria-hidden="true"></div>
 
-  <main>
-    <section class="opening scene">
-      <div class="opening-inner">
-        <div class="heart-loader" aria-hidden="true">♥</div>
-        <p class="hand intro-line" data-delay="600">Hi beautiful.</p>
-        <p class="hand intro-line" data-delay="2300">I made something for you.</p>
-      </div>
-    </section>
+  <section class="opening">
+    <div class="opening-inner">
+      <div class="heart-loader" aria-hidden="true">♥</div>
+      <p class="hand intro-line">Hi beautiful.</p>
+    </div>
+  </section>
 
+  <main>
     <section class="hero scene">
       <div class="hero-copy">
         <p class="kicker">Every Single Time</p>
         <h1>For My Favorite Person</h1>
-        <p id="typewriter" class="hero-type"></p>
-        <p>I made this because sometimes the things that matter most deserve more than a text message.</p>
-        <p>So...</p>
-        <p>Welcome to a tiny little corner of the internet that exists for one reason.</p>
+        <div id="hero-sequence" class="hero-sequence" aria-live="polite"></div>
         <p class="you pulse-line">You.</p>
       </div>
       <div class="scroll-hint">Scroll</div>
     </section>
 
-    <figure class="memory wide reveal">
+    <figure class="memory reveal">
       <img src="images/photo-6.jpg" alt="A personal photo of Dylan and Saige">
       <figcaption>A tiny little corner of the internet, and somehow still not enough room for everything I love about you.</figcaption>
     </figure>
 
-    <section class="story scene reveal">
-      <span class="egg tea">tea, not coffee</span>
+    <section class="story scene reveal letter-section">
       <h2>A Letter To You</h2>
-      <div class="copy"><p>I don’t think I’ve ever done the best job putting into words what you mean to me.</p>
+      <div class="copy letter-copy">
+<p>I don’t think I’ve ever done the best job putting into words what you mean to me.</p>
+
 <p>Life has a funny way of filling every day with responsibilities.</p>
-<p>The girls.</p>
-<p>The restaurant.</p>
-<p>The house.</p>
-<p>Family.</p>
-<p>Work.</p>
-<p>The million little things that quietly steal time from us.</p>
+
+<div class="mini-lines">
+  <span>The girls.</span>
+  <span>The restaurant.</span>
+  <span>The house.</span>
+  <span>Family.</span>
+  <span>Work.</span>
+  <span>The million little things that quietly steal time from us.</span>
+</div>
+
 <p>Somewhere between all of that, I realized there were things I wanted to tell you that deserved more than passing comments while making dinner or lying in bed half asleep.</p>
+
 <p>So I made this.</p>
-<p>Not because everything has been easy.</p>
-<p>Not because we’ve never struggled.</p>
-<p>But because even after everything we’ve been through...</p>
-<p>You’re still the person I want to come home to.</p>
-<p>You’re still the first person I want to tell good news to.</p>
-<p>You’re still the person whose hand I instinctively reach for.</p>
-<p>You’re still the person I want beside me when we’re eighty years old sitting on a porch making fun of each other.</p>
+
+<div class="mini-lines">
+  <span>Not because everything has been easy.</span>
+  <span>Not because we’ve never struggled.</span>
+  <span>But because even after everything we’ve been through...</span>
+</div>
+
+<div class="mini-lines tender">
+  <span>You’re still the person I want to come home to.</span>
+  <span>You’re still the first person I want to tell good news to.</span>
+  <span>You’re still the person whose hand I instinctively reach for.</span>
+  <span>You’re still the person I want beside me when we’re eighty years old sitting on a porch making fun of each other.</span>
+</div>
+
 <p>Thank you for choosing me.</p>
-<p>Thank you for building this crazy, beautiful life with me.</p></div>
+
+<p>Thank you for building this crazy, beautiful life with me.</p>
+</div>
     </section>
 
     <figure class="memory reveal">
@@ -123,7 +134,7 @@
 
     <p class="whisper reveal">I’m still staring at you.</p>
 
-    <section class="story scene reveal love-section">
+    <section class="story scene reveal love-section" id="what-i-love">
       <span class="egg hair">Forever color #27</span>
       <h2>Things I Don’t Tell You Often Enough</h2>
       <div class="copy love-copy"><p>You know...</p>
@@ -216,7 +227,7 @@
       <figcaption>The kind of love I hope our girls never have to question.</figcaption>
     </figure>
 
-    <figure class="memory wide reveal">
+    <figure class="memory reveal">
       <img src="images/photo-4.jpg" alt="Every. Single. Time.">
       <figcaption>Every. Single. Time.</figcaption>
     </figure>
