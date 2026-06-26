@@ -586,3 +586,145 @@ body.preload .slide{transition:none !important; animation:none !important}
   .intro-stage{height:min(58svh,500px);}
   .intro-hi-stage p{font-size:clamp(58px,15vw,112px)!important;}
 }
+
+
+/* v14 easter eggs + caption redesign */
+.counter, .progress { pointer-events:auto; }
+.counter { cursor:pointer; user-select:none; }
+.progress { cursor:pointer; }
+
+/* Photo captions below the image */
+.photo-stage{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:18px;
+}
+.caption-card.caption-below{
+  position:relative;
+  left:auto;
+  bottom:auto;
+  transform:none;
+  width:min(780px, calc(100% - 6px));
+  margin:0;
+  text-align:center;
+  padding:18px 26px 16px;
+  background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.02)), rgba(8,4,7,.44);
+  backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,.08);
+  box-shadow:0 16px 34px rgba(0,0,0,.22);
+}
+.caption-card.caption-below:before{
+  left:22px;
+  top:4px;
+}
+@media(max-width:740px){
+  .photo-stage{ gap:14px; }
+  .caption-card.caption-below{
+    width:min(92vw, 760px);
+    padding:14px 18px 14px;
+  }
+}
+
+/* Floating asides */
+.sorry-aside{
+  left:58%;
+  top:32%;
+  font-size:18px;
+  opacity:0;
+}
+.active .sorry-aside{
+  animation:ghostRiseSorry 2.8s ease 1.0s forwards;
+}
+.anime-aside{
+  left:57%;
+  top:32%;
+  font-size:17px;
+  opacity:0;
+  color:rgba(213,232,255,.86);
+  text-shadow:0 0 18px rgba(96,178,255,.26);
+}
+.active .anime-aside{
+  animation:ghostRiseAnime 3.2s ease 1.15s forwards;
+}
+@keyframes ghostRiseSorry{
+  0%{opacity:0;transform:translate(-50%,14px) scale(.9)}
+  26%{opacity:.78}
+  100%{opacity:0;transform:translate(-50%,-24px) scale(1)}
+}
+@keyframes ghostRiseAnime{
+  0%{opacity:0;transform:translate(-50%,16px) scale(.92)}
+  24%{opacity:.92}
+  100%{opacity:0;transform:translate(-50%,-22px) scale(1)}
+}
+
+/* Salon / family easter egg visuals */
+.tap-salon span,
+.tap-family span{
+  display:inline-block;
+  position:relative;
+  cursor:pointer;
+}
+.tap-salon span::after,
+.tap-family span::after{
+  content:"";
+  position:absolute;
+  left:0; right:0; bottom:-4px;
+  height:1px;
+  background:linear-gradient(90deg, transparent, rgba(255,205,220,.45), transparent);
+  transform:scaleX(.0);
+  opacity:.0;
+  transition:transform .3s ease, opacity .3s ease;
+}
+.tap-salon:hover span::after,
+.tap-family:hover span::after{
+  transform:scaleX(1);
+  opacity:1;
+}
+.salon-note{
+  left:50%;
+  top:68%;
+  font-size:18px;
+  opacity:0;
+  transform:translateX(-50%);
+}
+.easter-responsibilities.salon-praise .salon-note{
+  animation:ghostRiseSalon 2.6s ease forwards;
+}
+@keyframes ghostRiseSalon{
+  0%{opacity:0; transform:translate(-50%,10px) scale(.92)}
+  25%{opacity:.94}
+  100%{opacity:0; transform:translate(-50%,-28px) scale(1)}
+}
+.family-pop{
+  position:absolute;
+  left:50%;
+  top:74%;
+  z-index:4;
+  pointer-events:none;
+  opacity:0;
+  color:rgba(255,193,216,.86);
+  text-shadow:0 0 14px rgba(255,93,146,.22);
+  font-size:18px;
+}
+.family-pop.f1{ margin-left:-32px; }
+.family-pop.f2{ margin-left:0px; }
+.family-pop.f3{ margin-left:32px; }
+.easter-responsibilities.family-glow .family-pop.f1{ animation:familyFloat1 1.8s ease forwards; }
+.easter-responsibilities.family-glow .family-pop.f2{ animation:familyFloat2 1.8s ease .08s forwards; }
+.easter-responsibilities.family-glow .family-pop.f3{ animation:familyFloat3 1.8s ease .14s forwards; }
+@keyframes familyFloat1{
+  0%{opacity:0; transform:translate(-20px,0) scale(.6)}
+  25%{opacity:.95}
+  100%{opacity:0; transform:translate(-58px,-48px) scale(1.05)}
+}
+@keyframes familyFloat2{
+  0%{opacity:0; transform:translate(0,0) scale(.6)}
+  25%{opacity:.95}
+  100%{opacity:0; transform:translate(0,-56px) scale(1.06)}
+}
+@keyframes familyFloat3{
+  0%{opacity:0; transform:translate(20px,0) scale(.6)}
+  25%{opacity:.95}
+  100%{opacity:0; transform:translate(58px,-48px) scale(1.05)}
+}

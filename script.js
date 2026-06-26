@@ -13,20 +13,80 @@ const prevBtn = document.getElementById('prev');
 const playPauseBtn = document.getElementById('playpause');
 const scrubber = document.getElementById('scrubber');
 const hint = document.getElementById('hint');
+const counterEl = document.querySelector('.counter');
+const progressEl = document.querySelector('.progress');
+if(scrubber) scrubber.max = String(total);
 
 function clearTimers(){ clearTimeout(introTimer); clearTimeout(autoplayTimer); autoplayTimer = null; }
+function updateCounter(){ if(counterEl) counterEl.innerHTML = `<span id="current">${index + 1}</span> / ${total}`; }
 function setPlaying(on){ isPlaying = on; playPauseBtn.textContent = on ? 'Pause' : 'Play'; if(on){ userInteracted = true; scheduleAutoplay(); } else { clearTimeout(autoplayTimer); autoplayTimer = null; } }
 function scheduleAutoplay(){ if(!isPlaying) return; clearTimeout(autoplayTimer); const dur = Number(slides[index].dataset.duration || 3600); autoplayTimer = setTimeout(()=>{ if(index >= total - 1){ setPlaying(false); } else { showSlide(index + 1, false); } }, dur); }
-function showSlide(nextIndex, manual=false){ if(manual) userInteracted = true; clearTimeout(introTimer); index = Math.max(0, Math.min(total - 1, nextIndex)); const slide = slides[index]; slides.forEach((s,i)=>s.classList.toggle('active', i===index)); current.textContent = String(index + 1); progressBar.style.width = ((index+1)/total*100)+'%'; scrubber.value = String(index + 1); prevBtn.style.opacity = index===0 ? '.35' : '1'; nextBtn.textContent = index===total-1 ? 'Start Over' : 'Next'; if(index > 7) hint.style.opacity = '.28'; document.body.classList.toggle('quiet-mode', slide.classList.contains('quiet')); document.body.classList.toggle('dark-moment', slide.classList.contains('special-darken')); document.body.classList.toggle('tv-mode', slide.classList.contains('scene-tv')); document.body.classList.toggle('hush-mode', slide.classList.contains('scene-you') || slide.classList.contains('scene-cleanbeat')); document.body.classList.toggle('hush-lite', slide.classList.contains('scene-seen')); document.body.classList.toggle('scene-hush', slide.classList.contains('scene-hush')); if(!userInteracted && !isPlaying && index < 3){ const introDur = Number(slide.dataset.duration || 2400); introTimer = setTimeout(()=>showSlide(index+1, false), introDur); } if(isPlaying) scheduleAutoplay(); }
+function showSlide(nextIndex, manual=false){ if(manual) userInteracted = true; clearTimeout(introTimer); index = Math.max(0, Math.min(total - 1, nextIndex)); const slide = slides[index]; slides.forEach((s,i)=>s.classList.toggle('active', i===index)); updateCounter(); progressBar.style.width = ((index+1)/total*100)+'%'; scrubber.value = String(index + 1); prevBtn.style.opacity = index===0 ? '.35' : '1'; nextBtn.textContent = index===total-1 ? 'Start Over' : 'Next'; if(index > 7) hint.style.opacity = '.28'; document.body.classList.toggle('quiet-mode', slide.classList.contains('quiet')); document.body.classList.toggle('dark-moment', slide.classList.contains('special-darken')); document.body.classList.toggle('tv-mode', slide.classList.contains('scene-tv')); document.body.classList.toggle('hush-mode', slide.classList.contains('scene-you') || slide.classList.contains('scene-cleanbeat')); document.body.classList.toggle('hush-lite', slide.classList.contains('scene-seen')); document.body.classList.toggle('scene-hush', slide.classList.contains('scene-hush')); if(!userInteracted && !isPlaying && index < 3){ const introDur = Number(slide.dataset.duration || 2400); introTimer = setTimeout(()=>showSlide(index+1, false), introDur); } if(isPlaying) scheduleAutoplay(); }
 function next(manual=true){ if(index >= total-1){ showSlide(0, manual); } else { showSlide(index+1, manual); } }
 function prev(){ showSlide(index-1, true); }
 nextBtn.addEventListener('click', e=>{e.stopPropagation(); next(true);}); prevBtn.addEventListener('click', e=>{e.stopPropagation(); prev();}); playPauseBtn.addEventListener('click', e=>{ e.stopPropagation(); setPlaying(!isPlaying); }); scrubber.addEventListener('input', e=>{ showSlide(Number(e.target.value)-1, true); });
 document.addEventListener('click', e=>{ if(e.target.closest('button,input,textarea,label')) return; next(true); });
 document.addEventListener('keydown', e=>{ if(e.target.matches('input,textarea')) return; if(e.key==='ArrowRight'||e.key==='Enter'){e.preventDefault(); next(true);} if(e.key===' '){ e.preventDefault(); setPlaying(!isPlaying); } if(e.key==='ArrowLeft'){e.preventDefault(); prev();}}); let touchStartX = 0; document.addEventListener('touchstart', e=>{touchStartX = e.changedTouches[0].clientX;},{passive:true}); document.addEventListener('touchend', e=>{ if(e.target.closest('button,input,textarea,label')) return; const dx = e.changedTouches[0].clientX - touchStartX; if(Math.abs(dx) > 50){ dx < 0 ? next(true) : prev(); } },{passive:true});
 function createPetals(){ const field = document.querySelector('.petals'); for(let i=0;i<24;i++){ const p=document.createElement('span'); p.className='petal'; p.style.left=`${Math.random()*100}vw`; p.style.animationDuration=`${18 + Math.random()*26}s`; p.style.animationDelay=`${-Math.random()*32}s`; p.style.width=`${8 + Math.random()*11}px`; p.style.height=`${15 + Math.random()*16}px`; p.style.setProperty('--drift', `${Math.random()*170 - 85}px`); field.appendChild(p); } }
-function setupCopyButton(){ const btn = document.getElementById('copy-letter'); if(!btn) return; btn.addEventListener('click', async e=>{ e.stopPropagation(); const name=document.getElementById('from').value.trim()||'Saige'; const letter=document.getElementById('letter').value.trim(); const status=document.getElementById('copy-status'); if(!letter){ status.textContent='You have to write the letter first, beautiful. The button is powerful, but not psychic.'; return; } try{ await navigator.clipboard.writeText(`From: ${name}
+function setupCopyButton(){ const btn = document.getElementById('copy-letter'); if(!btn) return; btn.addEventListener('click', async e=>{ e.stopPropagation(); const name=document.getElementById('from').value.trim()||'Saige'; const letter=document.getElementById('letter').value.trim(); const status=document.getElementById('copy-status'); if(!letter){ status.textContent='You have to write something first, beautiful.'; return; } try{ await navigator.clipboard.writeText(`From: ${name}
 
 ${letter}`); status.textContent='Copied. Now paste it into a text to me.'; } catch { status.textContent='Copy did not work automatically. Highlight the text and copy it the old fashioned way.'; } }); }
-createPetals(); setupCopyButton();
+
+function pulseClass(el, name, ms=1900){
+  if(!el) return;
+  el.classList.remove(name);
+  void el.offsetWidth;
+  el.classList.add(name);
+  setTimeout(()=>el.classList.remove(name), ms);
+}
+function setupEasterEggs(){
+  const salonTap = document.querySelector('.tap-salon');
+  const familyTap = document.querySelector('.tap-family');
+  const salonSlide = document.querySelector('.easter-responsibilities');
+
+  if(salonTap && salonSlide){
+    salonTap.addEventListener('click', e=>{
+      e.stopPropagation();
+      pulseClass(salonSlide, 'salon-praise', 2600);
+    });
+  }
+  if(familyTap && salonSlide){
+    familyTap.addEventListener('click', e=>{
+      e.stopPropagation();
+      pulseClass(salonSlide, 'family-glow', 1800);
+    });
+  }
+
+  let secretTapCount = 0;
+  let secretTapTimer = null;
+  const registerSecretTap = ()=>{
+    secretTapCount += 1;
+    clearTimeout(secretTapTimer);
+    if(secretTapCount >= 5){
+      secretTapCount = 0;
+      if(counterEl){
+        counterEl.textContent = 'I / love / you';
+        secretTapTimer = setTimeout(()=>updateCounter(), 2200);
+      }
+      return;
+    }
+    secretTapTimer = setTimeout(()=>{ secretTapCount = 0; }, 1400);
+  };
+
+  if(counterEl){
+    counterEl.addEventListener('click', e=>{
+      e.stopPropagation();
+      registerSecretTap();
+    });
+  }
+  if(progressEl){
+    progressEl.addEventListener('click', e=>{
+      e.stopPropagation();
+      registerSecretTap();
+    });
+  }
+}
+
+createPetals(); setupCopyButton(); setupEasterEggs();
 function initDeck(){ document.body.classList.remove('preload'); showSlide(0); }
 if (document.fonts && document.fonts.ready) { document.fonts.ready.then(initDeck).catch(initDeck); } else { window.addEventListener('load', initDeck, { once: true }); }
