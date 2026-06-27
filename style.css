@@ -1733,3 +1733,67 @@ body.pre-video .secrets-toggle,body.pre-video .secrets-panel{opacity:0;pointer-e
 .caption-card.caption-below{
   padding-bottom:16px !important;
 }
+
+
+/* v31 serious/muted slide cleanup */
+.world-out-fixed,
+.world-out-fixed::before,
+.world-out-fixed::after{
+  background:none !important;
+  box-shadow:none !important;
+  filter:none !important;
+}
+.world-out-fixed .text-card{
+  width:min(980px,100%) !important;
+  min-height:min(520px,72svh) !important;
+  display:grid !important;
+  place-items:center !important;
+  justify-items:center !important;
+  align-content:center !important;
+  text-align:center !important;
+  background:transparent !important;
+  border:none !important;
+  box-shadow:none !important;
+  backdrop-filter:none !important;
+  margin:0 auto !important;
+  transform:none !important;
+}
+.world-out-fixed .text-card::before,
+.world-out-fixed .text-card::after,
+.world-out-fixed .lines::before,
+.world-out-fixed .lines::after,
+.world-out-fixed .world-vignette,
+.world-out-fixed .clean-world-out::before{
+  content:none !important;
+  display:none !important;
+}
+.world-out-fixed .lines,
+.world-out-fixed .lines p{
+  width:100% !important;
+  text-align:center !important;
+  margin-left:auto !important;
+  margin-right:auto !important;
+}
+
+/* soften already-muted ending slides a bit more */
+body.quiet-mode .ambient,
+body.quiet-mode .petals{
+  opacity:.02 !important;
+  filter:blur(8px) saturate(.55) !important;
+}
+body.quiet-mode .deck::before,
+body.quiet-mode #deck::before{
+  opacity:.16 !important;
+}
+body.quiet-mode .slide.kind-photo .photo-backdrop{
+  opacity:.18 !important;
+  filter:blur(24px) saturate(.55) brightness(.7) !important;
+}
+body.quiet-mode .slide.kind-photo .photo-frame{
+  box-shadow:0 18px 60px rgba(0,0,0,.22) !important;
+}
+body.dark-moment .ambient,
+body.dark-moment .petals{
+  opacity:.02 !important;
+  filter:blur(7px) saturate(.5) !important;
+}
